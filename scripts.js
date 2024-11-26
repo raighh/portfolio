@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-
+// Modal Javascript Code
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("project-modal");
   const modalContent = modal.querySelector(".modal-content");
@@ -114,6 +114,47 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.style.display = "none";
         document.body.classList.remove("modal-open");
       }, 500);
+    }
+  });
+});
+
+
+// Modal dynamic content code
+document.addEventListener("DOMContentLoaded", () => {
+  const projectItems = document.querySelectorAll(".project-item");
+  const modal = document.getElementById("project-modal");
+  const modalTitle = modal.querySelector(".modal-title");
+  const modalDescription = modal.querySelector(".modal-description");
+  const modalImage = modal.querySelector(".modal-image"); // Add an image to the modal if needed
+  const closeButton = modal.querySelector(".close-button");
+
+  // Open modal and populate content
+  projectItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const title = item.getAttribute("data-title");
+      const description = item.getAttribute("data-description");
+      const image = item.getAttribute("data-image");
+
+      // Update modal content
+      modalTitle.textContent = title;
+      modalDescription.textContent = description;
+
+      if (modalImage) {
+        modalImage.src = image;
+        modalImage.alt = title;
+      }
+    });
+  });
+
+  // Close modal
+  closeButton.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // Close modal when clicking outside the modal content
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
     }
   });
 });

@@ -22,49 +22,39 @@ header {
   background: white;
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: opacity 0.3s ease, visibility 1s ease; /* Smooth fade-out and hide */
 }
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 10px 90px; /* Add more space for alignment */
 }
 
-.nav-left,
-.nav-right {
+.nav-left, .nav-right {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 30px; /* Increase space between items */
 }
 
-.nav-left {
-  justify-content: flex-start;
-}
-
-.nav-right {
-  justify-content: flex-end;
-}
-
-.nav-left li a,
-.nav-right li a {
+.nav-left li a, .nav-right li a {
   text-decoration: none;
-  color: black;
-  text-transform: uppercase;
-  font-weight: bold;
+  color: #333;
+  font-size: 1.1rem; /* Adjust font size */
+  font-weight: normal; /* Lighter weight for non-active links */
+  letter-spacing: 0.05rem; /* Add subtle spacing */
+  text-transform: uppercase; /* Optional */
   transition: color 0.3s ease;
 }
 
-.nav-left li a:hover,
-.nav-right li a:hover {
-  color: #2a9d8f; /* Highlight color */
+.nav-right a.active, .nav-left a.active {
+  color: #2a9d8f; /* Active color */
+  font-weight: bold; /* Highlight active links */
+  border-bottom: 2px solid #2a9d8f; /* Optional underline for active */
 }
 
-.nav-right a.active {
-  color: #2a9d8f; /* Highlight color */
-  font-weight: bold; /* Make it stand out */
-  border-bottom: 2px solid #2a9d8f; /* Optional underline */
+.nav-left li a:hover, .nav-right li a:hover {
+  color: #2a9d8f; /* Hover effect */
 }
 
 
@@ -146,30 +136,29 @@ h1 {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Four items per row */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Auto-adjust columns */
   gap: 20px;
   justify-items: center;
 }
 
 .project-item {
   position: relative;
-  width: 300px;
-  height: 300px;
-  overflow: hidden;
-  border-radius: 8px;
+  width: 100%; /* Ensures the grid cells adjust dynamically */
+  height: 300px; /* Uniform height for all project items */
+  overflow: hidden; /* Hides any overflowing part of the image */
+  border-radius: 8px; /* Optional: Rounded corners */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
 .project-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 100%; /* Ensure the image stretches to the container width */
+  height: 100%; /* Ensures the height fits within the container */
   transition: transform 0.3s ease-in-out;
 }
 
 .project-item:hover img {
-  transform: scale(1.1); /* Zoom effect */
+  transform: scale(1.1); /* Slight zoom on hover */
 }
 
 .overlay {
@@ -178,17 +167,20 @@ h1 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.8);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .project-item:hover .overlay {
-  opacity: 1;
+  opacity: 1; /* Show overlay on hover */
 }
 
 
@@ -222,14 +214,22 @@ h1 {
   text-align: center;
   max-width: 1100px;
   width: 90%; /* Take 90% of the screen width */
-  height: 100%; /* Full height minus modal padding */
+  height: 92%; /* Full height minus modal padding */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   overflow-y: auto; /* Allow scrolling for overflowing content */
   position: relative; /* Establish a positioning context for the close button */
 }
 
+.modal-content p {
+  margin: 0 auto 5px 0; /* Align box to the left with margin adjustments */
+  width: auto; /* Let the width be dynamic or adjust as needed */
+  text-align: left; /* Ensure text inside is left-aligned */
+  margin-left: 130px;
+  font-size: 1.2em;
+}
+
 .modal-content img {
-  max-width: 100%;
+  max-width: 40%;
   height: auto;
   margin-bottom: 20px;
   margin-top: 20px;
@@ -237,7 +237,7 @@ h1 {
 }
 
 .modal-title {
-  font-size: 2rem;
+  font-size: 1.6rem;
   margin-bottom: 10px;
   font-weight: bold;
   color: #333;
@@ -255,6 +255,8 @@ h1 {
 }
 
 .modal-description {
+  margin-left: 130px;
+  margin-right: 130px;
   text-align: left;
   font-size: 1rem;
   color: #444;
@@ -262,15 +264,18 @@ h1 {
 }
 
 .modal-description p {
+  text-align: left;
   margin-bottom: 10px;
   margin-left: 70px;
   margin-right: 70px;
 }
 
-hr {
-  margin: 20px 0;
+.modal hr {
+  margin: 15px 0;
   border: none;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #ddd; /* Light gray line */
+  width: 80%; /* Adjust line length */
+  align-self: center; /* Center align the line */
 }
 
 /* Close Button Positioned with Flexbox */
@@ -359,16 +364,20 @@ body.modal-open {
 .qualification-images {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  margin-bottom: 40px;
+  gap: 20px; /* Space between images */
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  align-items: center;
+  padding: 20px 0;
 }
 
 .qualification-image {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 300px; /* Limit maximum width */
+  max-height: 400px; /* Limit maximum height for consistency */
+  width: 100%; /* Responsive scaling */
+  object-fit: cover; /* Maintain aspect ratio and fill the container */
+  border-radius: 8px; /* Optional: rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: add a shadow for better appearance */
+  transition: transform 0.3s ease; /* Smooth scaling effect on hover */
 }
 
 /* Skills Section */
