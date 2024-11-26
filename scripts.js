@@ -50,6 +50,22 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("scroll", animateSkills);
   });
 
+  document.addEventListener("DOMContentLoaded", () => {
+    const skills = document.querySelectorAll(".skill-fill");
+
+    skills.forEach((skill) => {
+        const skillPercentage = skill.getAttribute("data-skill");
+        skill.style.width = `${skillPercentage}%`;
+
+        // Add the percentage number
+        const skillText = skill.querySelector(".skill-percentage");
+        skillText.textContent = `${skillPercentage}%`;
+    });
+});
+
+
+
+
 // Smooth scrolling for header navigation links
 document.addEventListener("DOMContentLoaded", () => {
     const navLinks = document.querySelectorAll("header .navbar a");

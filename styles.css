@@ -409,19 +409,32 @@ body.modal-open {
 }
 
 .skill-bar {
-  background-color: #ddd;
-  border-radius: 5px;
-  overflow: hidden;
-  height: 20px;
   position: relative;
+  background-color: #e0e0e0; /* Light grey background for skill bar */
+  border-radius: 8px;
+  overflow: hidden;
+  height: 25px;
+  width: 100%;
 }
 
 .skill-fill {
   height: 100%;
-  background-color: #2a9d8f;
-  width: 0%; /* Starts empty */
-  transition: width 1.5s ease-out;
-  border-radius: 5px;
+  border-radius: 8px;
+  background-color: #2a9d8f; /* Bar color */
+  width: 0%; /* Start at 0% for animation */
+  position: relative;
+  transition: width 2s ease; /* Smooth animation */
+}
+
+.skill-percentage {
+  position: absolute; /* Position relative to the bar container */
+  right: 10px; /* Align to the far right */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust for vertical alignment */
+  color: #fff; /* Text color for contrast */
+  font-weight: bold; /* Bold text */
+  z-index: 1; /* Ensure the text appears above the bar */
+  pointer-events: none; /* Prevent the text from interfering with interactions */
 }
 
 
