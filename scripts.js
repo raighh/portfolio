@@ -31,36 +31,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Activate skill bar animation when in view
 document.addEventListener("DOMContentLoaded", () => {
-    const skillBars = document.querySelectorAll(".skill-fill");
-  
-    const animateSkills = () => {
+  const skillBars = document.querySelectorAll(".skill-fill");
+
+  const animateSkills = () => {
       skillBars.forEach((bar) => {
-        const skillValue = bar.getAttribute("data-skill");
-        const barTop = bar.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-  
-        // Check if the skill bar is in view
-        if (barTop < windowHeight - 100) {
-          bar.style.width = skillValue + "%";
-        }
+          const skillValue = bar.getAttribute("data-skill");
+          const barRect = bar.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+
+          // Check if the skill bar is in view
+          if (barRect.top < windowHeight - 30 && barRect.bottom > 50) {
+              // Trigger animation
+              bar.style.transition = "width 1s ease-in-out"; // Smooth animation
+              bar.style.width = skillValue + "%";
+
+              // Add percentage text (if needed)
+              const skillText = bar.querySelector(".skill-percentage");
+              if (skillText) {
+                  skillText.textContent = `${skillValue}%`;
+              }
+          } else {
+              // Reset the bar when it goes out of view
+              bar.style.transition = "none"; // Remove animation for instant reset
+              bar.style.width = "0%";
+
+              // Clear percentage text (if needed)
+              const skillText = bar.querySelector(".skill-percentage");
+              if (skillText) {
+                  skillText.textContent = "";
+              }
+          }
       });
-    };
-  
-    // Listen for scroll events
-    window.addEventListener("scroll", animateSkills);
-  });
+  };
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const skills = document.querySelectorAll(".skill-fill");
-
-    skills.forEach((skill) => {
-        const skillPercentage = skill.getAttribute("data-skill");
-        skill.style.width = `${skillPercentage}%`;
-
-        // Add the percentage number
-        const skillText = skill.querySelector(".skill-percentage");
-        skillText.textContent = `${skillPercentage}%`;
-    });
+  // Listen for scroll events
+  window.addEventListener("scroll", animateSkills);
 });
 
 
